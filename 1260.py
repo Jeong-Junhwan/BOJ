@@ -1,13 +1,14 @@
 import sys
 from collections import deque
-n,m,v = map(int,sys.stdin.readline().split())
-visited_dfs = [False] * (n+1)
-visited_bfs = [False] * (n+1)
+
+n, m, v = map(int, sys.stdin.readline().split())
+visited_dfs = [False] * (n + 1)
+visited_bfs = [False] * (n + 1)
 
 graph = dict()
 
 for _ in range(m):
-    a,b = map(int,sys.stdin.readline().split())
+    a, b = map(int, sys.stdin.readline().split())
     if a in graph:
         graph[a].append(b)
     else:
@@ -16,9 +17,10 @@ for _ in range(m):
         graph[b].append(a)
     else:
         graph[b] = [a]
-    
+
+
 def dfs(x):
-    dfs_result=[]
+    dfs_result = []
     stack = [x]
     while stack:
         node = stack.pop()
@@ -26,9 +28,10 @@ def dfs(x):
             visited_dfs[node] = True
             dfs_result.append(node)
             if node in graph:
-                graph[node].sort(reverse = True)
+                graph[node].sort(reverse=True)
                 stack.extend(graph[node])
     return dfs_result
+
 
 def bfs(x):
     bfs_result = []
@@ -44,8 +47,9 @@ def bfs(x):
                 queue.extend(graph[node])
     return bfs_result
 
+
 for i in dfs(v):
-    print(i, end=' ')
+    print(i, end=" ")
 print()
 for i in bfs(v):
-    print(i, end=' ')
+    print(i, end=" ")
